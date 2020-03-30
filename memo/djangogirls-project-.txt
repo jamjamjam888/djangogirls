@@ -1,0 +1,63 @@
+django girls -project-
+20191116
+
+小さなブログを作っていく。
+最初のステップはDjangoのプロジェクトを新しく作成です。
+
+※virtualenv(仮想環境)を実行しているか？もしプロンプト上で(myvenv)という文字が表示されていないのであれば、
+仮想環境を有効にする必要があります。
+↓仮想環境を有効にするコマンド
+$myvenv\Scripts\activate
+
+-projectを作成する-
+Windows の場合は、以下のコマンドを実行しないといけません。(最後にピリオド (ドット) . を書いてください)
+(myvenv) >django-admin.exe startproject mysite .
+
+ピリオドの意味:現在の作業ディレクトリにDjangoをインストールするということを示す。ピリオドは簡略表記。
+
+実行すると以下のようになる。
+
+djangogirls
+├── manage.py#サイトの管理に役立つスクリプト。
+├── mysite
+│   ├── __init__.py
+│   ├── settings.py#ウェブサイトの設定
+│   ├── urls.py#urlresolverで使用されるパターンのリストが含まれる
+│   └── wsgi.py
+├── myvenv
+│   └── ...
+└── requirements.txt
+
+mysite/settings.pyに変更を加える。
+-設定変更-
+➀タイムゾーンを日本時間に設定。(Wikipediaからコピペできる)
+　TIME_ZONE = 'Asia/Tokyo'
+➁言語コードを日本語に設定
+　LANGUAGE_CODE = 'ja'
+➂静的ファイルのパスも追加する必要があります。←？
+　ファイルの一番下に移動し、STATIC_URLの下に STATIC_ROOTを追加します。
+　STATIC_URL = '/static/'
+　STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+➃DEBUG が True に設定されていて、ALLOWED_HOSTS が空のリストの時は、自動的に ['localhost', '127.0.0.1', '[::1]'] という3つのホストに対してチェックが行われます。 このままの設定では、これから私たちがデプロイして使う PythonAnywhere のホストネームが含まれていません。
+　ですから、次のように設定を変更します。
+　ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+
+-データベースをセットアップ-
+あなたのサイトのデータを保管することができるデータベース・ソフトウェアには、たくさんの種類があります。
+今は、Django がデフォルトで使う sqlite3 というデータベースを使うことにします。
+
+defaultのコード
+　DATABASES = {
+   　 'default': {
+     　   'ENGINE': 'django.db.backends.sqlite3',
+       　 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    　}
+　}
+
+ブログのデータベースを作成するには、コンソールで次のコードを実行してみましょう：
+$python manage.py migrate 
+終わったらWebサーバーを起動しWebサイトが起動しているかどうか確認する。
+
+-ウェブサーバを起動する-
+起動コマンド
+(myvenv) ~/djangogirls$ python manage.py runserver

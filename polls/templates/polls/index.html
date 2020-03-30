@@ -1,0 +1,28 @@
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li>
+            <a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    </p>No polls are avairable.
+    </p>
+{% endif %}
+
+<!--
+#コメントアウト
+-->
+<!--
+pollsディレクトリの中にtemplatesディレクトリを作成する。
+Djangoはそこからテンプレートを探す。
+プロジェクトのテンプレートには、Djangoがどのようにテンプレートをロードしレンダリングするかが書かれている。
+
+※なぜ
+>poll/templates/polls/index.html
+というディレクトリ配置なのか？
+polls/templatesの中に直接配置した場合、Djangoは名前のマッチした最初のテンプレートを使用する
+➡異なるアプリケーションの中に同じ名前のテンプレートがあった場合区別ができない
+そのため、そのテンプレートごとに名前空間を与えるのが一番簡単な方法
+-->

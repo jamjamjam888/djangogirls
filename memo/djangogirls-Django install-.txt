@@ -1,0 +1,52 @@
+djangogirls tutorial -Djangoのインストール-
+20191116
+
+djangogirlsフォルダはフォルダのクイックアクセスにピン止めしてある
+rinnaの直下にある。
+
+-djangoの操作-
+➀仮想環境の作成
+仮想環境(virtual environment)ではプロジェクト単位でセットアップを隔離することができる。
+これは、他のウェブサイトにおこなった変更の影響を開発中の他のサイトに影響を及ぼさないための措置。
+
+何をしなければならないか？
+仮想環境を作成したいディレクトリを作成。
+今回はディレクトリdjangogirlsを作成。
+このディレクトリ上で
+
+$ python3 -m venv myvenv
+
+を実行するとmyvenvという仮想環境を作成することができる。
+
+➁仮想環境の起動
+djangogirls ディレクトリ上で
+$ myvenv\Scripts\activate
+を実行してコンソールでプロンプトの行頭に (myvenv) が付いたら、仮想環境(virtualenv) を起動しています。
+
+➂Djangoのインストール
+まずはDjangoのインストールに使うpipをインストール
+
+~$ python -m pip install --upgrade pip
+
+そしてdjangogirls/フォルダ内にrequirements.txtファイルを作成
+djangogirls
+├── myvenv
+│   └── ...
+└───requirements.txt
+
+中身
+-djangogirls/requirements.txt-
+
+Django~=2.2.4
+
+この状態で
+
+$pip install -r requirements.txt
+
+を実行。Djangoがインストールされる。
+
+
+補足： 人気のあるエディタであるVS Codeを使っている方は、VS CodeはWindows Powershellベースの統合ターミナルが一緒になっているので、統合ターミナルを使う場合、仮想環境を有効にするために下記のコマンドを実行してください：
+
+$ . myvenv\Scripts\activate.ps1
+エディタのウィンドウとコマンドラインのウィンドウを行き来する必要がなくなるのが利点です。
